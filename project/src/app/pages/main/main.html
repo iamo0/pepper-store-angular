@@ -37,46 +37,17 @@
       </div>
     </form>
     <section class="flex flex-wrap gap-2">
-      <a href="#">
-        <article class="bg-gray-100 border border-gray-200 rounded-md p-4 hover:border-gray-300">
-          <img class="mb-4" src="/products/pepper-01.png" width="272" height="247" alt="Ghost Pepper Powder" />
-          <h2 class="mb-2">Ghost Pepper Powder</h2>
-          <p class="mb-2 font-600">$6.66</p>
-          <p class="text-sm text-gray-500">A lingering heat that will haunt you</p>
-        </article>
-      </a>
-      <a href="#">
-        <article class="bg-gray-100 border border-gray-200 rounded-md p-4 hover:border-gray-300">
-          <img class="mb-4" src="/products/pepper-01.png" width="272" height="247" alt="Ghost Pepper Powder" />
-          <h2 class="mb-2">Ghost Pepper Powder</h2>
-          <p class="mb-2 font-600">$6.66</p>
-          <p class="text-sm text-gray-500">A lingering heat that will haunt you</p>
-        </article>
-      </a>
-      <a href="#">
-        <article class="bg-gray-100 border border-gray-200 rounded-md p-4 hover:border-gray-300">
-          <img class="mb-4" src="/products/pepper-01.png" width="272" height="247" alt="Ghost Pepper Powder" />
-          <h2 class="mb-2">Ghost Pepper Powder</h2>
-          <p class="mb-2 font-600">$6.66</p>
-          <p class="text-sm text-gray-500">A lingering heat that will haunt you</p>
-        </article>
-      </a>
-      <a href="#">
-        <article class="bg-gray-100 border border-gray-200 rounded-md p-4 hover:border-gray-300">
-          <img class="mb-4" src="/products/pepper-01.png" width="272" height="247" alt="Ghost Pepper Powder" />
-          <h2 class="mb-2">Ghost Pepper Powder</h2>
-          <p class="mb-2 font-600">$6.66</p>
-          <p class="text-sm text-gray-500">A lingering heat that will haunt you</p>
-        </article>
-      </a>
-      <a href="#">
-        <article class="bg-gray-100 border border-gray-200 rounded-md p-4 hover:border-gray-300">
-          <img class="mb-4" src="/products/pepper-01.png" width="272" height="247" alt="Ghost Pepper Powder" />
-          <h2 class="mb-2">Ghost Pepper Powder</h2>
-          <p class="mb-2 font-600">$6.66</p>
-          <p class="text-sm text-gray-500">A lingering heat that will haunt you</p>
-        </article>
-      </a>
+      @for (item of catalog.getFilteredData(); track item.id) {
+        <a href="#">
+          <article class="bg-gray-100 border border-gray-200 rounded-md p-4 hover:border-gray-300">
+            <img class="mb-4" [src]="item.image" width="272" height="247" [alt]="item.name" />
+            <h2 class="mb-2">{{item.name}}</h2>
+            <!-- TODO: Implement a pipe to render all the currencies -->
+            <p class="mb-2 font-600">${{item.price.value}}</p>
+            <p class="text-sm text-gray-500">{{ item.description }}</p>
+          </article>
+        </a>
+      }
     </section>
   </section>
 </main>
