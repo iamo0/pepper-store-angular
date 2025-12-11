@@ -36,5 +36,6 @@ export class Main {
   onHeatLevelChange(evt: Event) {
     const clickedInput = evt.target as HTMLInputElement;
     const checkedHeatLevel = clickedInput.value as HeatLevel;
+    this.catalog.toggleHeatLevel(checkedHeatLevel);
   }
 }

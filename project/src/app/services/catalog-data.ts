@@ -42,7 +42,7 @@ export class CatalogData {
         value: 8.5,
         currency: "USD",
       },
-      description: " Lures you in with sweetness, then bites",
+      description: "Lures you in with sweetness, then bites",
       image: "/products/pepper-02.png",
       rating: 8,
       heatLevel: HeatLevel.MEDIUM,
@@ -94,12 +94,33 @@ export class CatalogData {
   selectedHeatLevels = signal<HeatLevel[]>([]);
 
   filteredData = computed(() => {
-    const newList = [...this.#data];
+    const totalHeatLevels = Object.keys(HeatLevel).length;
 
-    const filteredList = newList.filter(() => true);
+    const filteredList = [...this.#data]
+      // Filter by name
+      .filter(() => true)
+      // Filter by type
+      .filter(() => true)
+      // Filter by heat level
+      .filter((p) => {
+        if (this.selectedHeatLevels().length === 0 || this.selectedHeatLevels().length === totalHeatLevels) {
+          return true;
+        }
+
+        return this.selectedHeatLevels().includes(p.heatLevel);
+      });
 
     filteredList.sort(SortFunctionByDirection.get(this.sortDirection())!);
 
     return filteredList;
   })
+
+  toggleHeatLevel(heatLevel: HeatLevel) {
+    if (this.selectedHeatLevels().includes(heatLevel)) {
+      this.selectedHeatLevels.update((levels) => levels.filter((level) => level !== heatLevel));
+      return;
+    }
+
+    this.selectedHeatLevels.update((levels) => [...levels, heatLevel]);
+  }
 }
