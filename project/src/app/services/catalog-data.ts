@@ -34,9 +34,8 @@ export class CatalogData {
   selectedProductTypes = signal<ProductType[]>([]);
 
   constructor() {
-    // TODO: Preloader for UI (Possibly with async pipe)
-    this.#apiFetcher.get(API_URL.PRODUCTS).subscribe((data: any) => {
-      this.#data.set(data.data.map((i: Product) => ({
+    this.#apiFetcher.get(API_URL.PRODUCTS).subscribe((data) => {
+      this.#data.set(data.data.map((i) => ({
         ...i,
         image: {
           ...i.image,
